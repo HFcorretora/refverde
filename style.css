@@ -1,0 +1,161 @@
+/* Fonte Poppins importada via Google Fonts */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8fafc;
+  color: #2f855a;
+  margin: 0;
+  padding: 0;
+}
+
+/* Gradiente hero */
+.hero-gradient {
+  background: linear-gradient(135deg, #2f855a 0%, #38a169 100%);
+}
+
+/* Cards de serviços e planos */
+.plan-card,
+.service-card {
+  border-radius: 1rem;
+  background-color: white;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.plan-card:hover,
+.service-card:hover {
+  box-shadow: 0 10px 25px rgba(47, 133, 90, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Botões */
+.btn-primary {
+  background-color: white;
+  color: #2f855a;
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: #38a169;
+}
+
+.btn-secondary {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: #2f855a;
+  color: white;
+}
+
+/* Botão WhatsApp flutuante */
+.whatsapp-floating-btn {
+  background-color: #38a169;
+  padding: 1rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(56, 161, 105, 0.5);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.whatsapp-floating-btn:hover {
+  background-color: #2f855a;
+  transform: scale(1.1);
+}
+
+/* Animações de fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.opacity-100 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay para animação */
+.fade-in.delay-200 {
+  transition-delay: 0.2s;
+}
+.fade-in.delay-400 {
+  transition-delay: 0.4s;
+}
+.fade-in.delay-600 {
+  transition-delay: 0.6s;
+}
+.fade-in.delay-800 {
+  transition-delay: 0.8s;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  .hero-gradient {
+    padding: 2rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .plan-card,
+  .service-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #2f855a;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
