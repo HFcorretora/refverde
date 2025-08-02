@@ -1,3 +1,7 @@
+// Número do WhatsApp centralizado
+const whatsappNumber = "551151073015";
+const whatsappLink = `https://wa.me/${whatsappNumber}?text=Ol%C3%A1,%20gostaria%20de%20iniciar%20o%20atendimento.`;
+
 // Toggle mobile menu
 const menuBtn = document.getElementById("menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
@@ -92,11 +96,23 @@ window.addEventListener("load", () => {
     preloader.style.display = "none";
   }
 });
-// Exemplo de animação de loader (ajustar conforme seu HTML)
+
+// Atualiza botões do WhatsApp com o número centralizado
 document.addEventListener("DOMContentLoaded", () => {
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    preloader.style.display = "none";
+  const whatsappBtn = document.querySelector(".whatsapp-floating-btn");
+  if (whatsappBtn) {
+    whatsappBtn.setAttribute("href", whatsappLink);
+  }
+
+  // Atualiza todos os botões com a classe .btn-whatsapp
+  document.querySelectorAll(".btn-whatsapp").forEach((btn) => {
+    btn.setAttribute("href", whatsappLink);
+  });
+});
+// Atualiza o link do WhatsApp no rodapé
+document.addEventListener("DOMContentLoaded", () => {
+  const footerWhatsappLink = document.querySelector(".footer-whatsapp-link");
+  if (footerWhatsappLink) {
+    footerWhatsappLink.setAttribute("href", whatsappLink);
   }
 });
-// Exemplo de animação de loader (ajustar conforme seu HTML)
