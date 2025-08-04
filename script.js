@@ -1,5 +1,5 @@
 // Número do WhatsApp centralizado
-const whatsappNumber = "551151073015";
+const whatsappNumber = "551151073269";
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=Ol%C3%A1,%20gostaria%20de%20iniciar%20o%20atendimento.`;
 
 // Toggle mobile menu
@@ -108,9 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn-whatsapp").forEach((btn) => {
     btn.setAttribute("href", whatsappLink);
   });
-});
-// Atualiza o link do WhatsApp no rodapé
-document.addEventListener("DOMContentLoaded", () => {
+
+  // Atualiza o link do WhatsApp no rodapé, se existir
   const footerWhatsappLink = document.querySelector(".footer-whatsapp-link");
   if (footerWhatsappLink) {
     footerWhatsappLink.setAttribute("href", whatsappLink);
