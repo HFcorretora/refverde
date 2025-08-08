@@ -1,71 +1,54 @@
-// =========================
-// Configuração centralizada
-// =========================
-const whatsappNumber = "551151073269";
+// Número do WhatsApp centralizado
+const whatsappNumber = "551151073262"; // Atualizado para o número correto
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=Ol%C3%A1,%20gostaria%20de%20iniciar%20o%20atendimento.`;
 
-// =========================
-// Menu mobile
-// =========================
+// Toggle mobile menu
 const menuBtn = document.getElementById("menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
 
-if (menuBtn && mobileMenu) {
-  menuBtn.addEventListener("click", () => {
-    const isOpen = !mobileMenu.classList.toggle("hidden");
-    menuBtn.setAttribute("aria-expanded", isOpen);
-  });
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
 
-  // Fecha ao clicar fora
-  document.addEventListener("click", (e) => {
-    if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-      mobileMenu.classList.add("hidden");
-      menuBtn.setAttribute("aria-expanded", false);
-    }
-  });
+// Fecha menu ao clicar fora
+document.addEventListener("click", (e) => {
+  if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+    mobileMenu.classList.add("hidden");
+  }
+});
 
-  // Fecha com tecla ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      mobileMenu.classList.add("hidden");
-      menuBtn.setAttribute("aria-expanded", false);
-    }
-  });
-}
+// Fecha menu com tecla Esc
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mobileMenu.classList.add("hidden");
+  }
+});
 
-// =========================
-// Scroll ativo no menu (debounced)
-// =========================
+// Scroll ativo no menu — destaca link da seção visível
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".scroll-link");
 
-let scrollTimeout;
 window.addEventListener("scroll", () => {
-  clearTimeout(scrollTimeout);
-  scrollTimeout = setTimeout(() => {
-    const scrollY = window.scrollY + 100;
-    sections.forEach((section) => {
-      const id = section.id;
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
+  const scrollY = window.scrollY + 100;
+  sections.forEach((section) => {
+    const id = section.getAttribute("id");
+    const top = section.offsetTop;
+    const height = section.offsetHeight;
 
-      if (scrollY >= top && scrollY < top + height) {
-        navLinks.forEach((link) => {
-          link.classList.toggle(
-            "text-green-600",
-            link.getAttribute("href") === `#${id}`
-          );
-        });
-      }
-    });
-  }, 50);
+    if (scrollY >= top && scrollY < top + height) {
+      navLinks.forEach((link) => {
+        link.classList.remove("text-green-600");
+        if (link.getAttribute("href") === `#${id}`) {
+          link.classList.add("text-green-600");
+        }
+      });
+    }
+  });
 });
 
-// =========================
-// Scroll suave com bloqueio
-// =========================
+// Smooth scroll com bloqueio para múltiplos cliques rápidos
 let scrolling = false;
-navLinks.forEach((link) => {
+document.querySelectorAll(".scroll-link").forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     if (scrolling) return;
@@ -81,15 +64,14 @@ navLinks.forEach((link) => {
     }
     if (!mobileMenu.classList.contains("hidden")) {
       mobileMenu.classList.add("hidden");
-      menuBtn?.setAttribute("aria-expanded", false);
     }
-    setTimeout(() => (scrolling = false), 800);
+    setTimeout(() => {
+      scrolling = false;
+    }, 800);
   });
 });
 
-// =========================
-// Fade-in animado (IntersectionObserver)
-// =========================
+// Fade-in animado com IntersectionObserver (mais performático)
 const fadeInElems = document.querySelectorAll(".fade-in");
 const observer = new IntersectionObserver(
   (entries) => {
@@ -102,23 +84,35 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.1 }
 );
-fadeInElems.forEach((el) => observer.observe(el));
 
-// =========================
-// Loader ao carregar o site
-// =========================
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  if (preloader) preloader.style.display = "none";
+fadeInElems.forEach((el) => {
+  observer.observe(el);
 });
 
-// =========================
-// Atualiza todos os botões do WhatsApp
-// =========================
+// Loader animado ao carregar o site
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.style.display = "none";
+  }
+});
+
+// Atualiza botões do WhatsApp com o número centralizado
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .querySelectorAll(
-      ".whatsapp-floating-btn, .btn-whatsapp, .footer-whatsapp-link"
-    )
-    .forEach((btn) => btn.setAttribute("href", whatsappLink));
+  const whatsappBtn = document.querySelector(".whatsapp-floating-btn");
+  if (whatsappBtn) {
+    whatsappBtn.setAttribute("href", whatsappLink);
+  }
+
+  // Atualiza todos os botões com a classe .btn-whatsapp
+  document.querySelectorAll(".btn-whatsapp").forEach((btn) => {
+    btn.setAttribute("href", whatsappLink);
+  });
+
+  // Atualiza o link do WhatsApp no rodapé, se existir
+  // No seu HTML atual, adicione a classe "footer-whatsapp-link" neste <a> do rodapé para funcionar
+  const footerWhatsappLink = document.querySelector(".footer-whatsapp-link");
+  if (footerWhatsappLink) {
+    footerWhatsappLink.setAttribute("href", whatsappLink);
+  }
 });
